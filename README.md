@@ -12,8 +12,16 @@ brew install wrk
 
 ## Test
 
+首次测试，需要安装依赖，会比较慢
+
 ```
-npm test
+make all
+```
+
+不安装依赖，重复测试
+
+```
+make test
 ```
 
 ## Results
