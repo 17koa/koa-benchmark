@@ -4,7 +4,7 @@ echo
 MW=$1 node $2 &
 pid=$!
 
-sleep 5
+sleep 2
 
 wrk 'http://localhost:3333/?foo[bar]=baz' \
   -d 3 \
