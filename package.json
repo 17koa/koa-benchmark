@@ -1,0 +1,26 @@
+{
+  "name": "koa-benchmark",
+  "version": "1.0.0",
+  "description": "比较koa和koa2和express性能",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run env && npm run dep && npm run koa-1 && npm run koa-2 && npm run express",
+    "env": "node -v && npm -v",
+    "express": "make express",
+    "koa-1": "make koa-1",
+    "koa-2": "npm i koa@2 && make koa-2",
+    "dep": "npm i koa@1 babel express"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/17koa/koa-benchmark.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/17koa/koa-benchmark/issues"
+  },
+  "homepage": "https://github.com/17koa/koa-benchmark#readme",
+  "dependencies": {
+  }
+}
