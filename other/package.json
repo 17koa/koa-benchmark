@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run env && npm run dep && npm run koa-1 && npm run koa-2 && npm run express",
-    "env": "node -v && npm -v",
-    "express": "make express",
-    "koa-1": "make koa-1",
-    "koa-2": "npm i koa@2 && make koa-2",
-    "dep": "npm i koa@1 babel express"
+    "env": "node -v && npm -v"
   },
   "repository": {
     "type": "git",
@@ -22,5 +18,7 @@
   },
   "homepage": "https://github.com/17koa/koa-benchmark#readme",
   "dependencies": {
+    "express": "^4.13.4",
+    "koa": "^1.2.0"
   }
 }

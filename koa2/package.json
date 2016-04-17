@@ -1,0 +1,24 @@
+{
+  "name": "koa2-benchmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/babel koa2-async.js  --out-file koa2-async-compile.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "i5ting",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.7.5",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.7.4",
+    "babel-polyfill": "^6.1.4",
+    "babel-preset-es2015-node5": "^1.2.0",
+    "babel-preset-stage-3": "^6.5.0"
+  }
+}
