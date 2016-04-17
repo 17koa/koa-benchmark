@@ -1,3 +1,19 @@
+all: clean test
+
+test: prepare koa-1 koa-2 koa-2-async express
+
+prepare:
+	@cd koa2 && npm install
+	@cd ..
+	@cd other && npm install
+	@cd ..
+	@echo	'prepare complete'
+	
+version:
+	@node -v
+	@npm -v
+	@echo	
+	
 koa-1:
 	@echo	'benchmark koa-1'
 	@./run 1 other/koa1.js
@@ -45,3 +61,9 @@ express:
 	@./run 50 other/express.js
 	@./run 100 other/express.js
 	@echo	
+
+clean:
+	@rm -rf koa2/node_modules
+	@rm -rf other/node_modules
+	
+.PHONY: prepare test 

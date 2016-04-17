@@ -1,13 +1,17 @@
 {
   "name": "koa2-benchmark",
   "version": "1.0.0",
-  "description": "",
+  "description": "benchmark",
   "main": "index.js",
   "scripts": {
     "postinstall": "./node_modules/.bin/babel koa2-async.js  --out-file koa2-async-compile.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "i5ting",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/17koa/koa-benchmark.git"
+  },
   "license": "ISC",
   "dependencies": {
     "koa": "^2.0.0"
