@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Wrk Benchmark Table</title>
+		<meta name="description" content="HTML-based table with fixed headers, fixed footers, fixed left columns, row selection, sorting and more. Open source.">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<link href="assets/Grid.css" rel="stylesheet" type="text/css">
+
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<h1 id="hdr">Wrk Benchmark Table</h1>
+		<h3 id="hdr_meta"></h3>
+		<div id="demoDiv">
+			<div id="demoGrid">
+				<table id="demoTable">
+					<colgroup><col id="demoTableCol1"></colgroup>
+					<thead id='head'>
+		
+					</thead>
+					<tbody id='body'>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+    <script src="assets/zepto.min.js"></script>
+		<script type="text/javascript" src="assets/Grid.js"></script>
+		<script type="text/javascript">
+    
+      $(function(){
+        var filter = ["host","port","threads","connections"]
+        var items = ["time","latency_avg","latency_stdev","latency_max","latency_precent","req_per_second_avg","req_per_second_stdev","req_per_second_max","req_per_second_precent","requests_count","requests_seconds","requests_read","requests_per_sec","transfer_per_sec"];
+        
+        $.get('logs/wrk_result04-15.json', function(json){
+          var gridColSortTypes = []
+          
+          var head_data = []
+          var body_data = []
+          
+          var one = {}
+          
+          for(var k in json){
+            var item = {}
+            item.key = k;
+            item.values = json[k];
+            var tds = [];
+            
+            for (var filter_k in filter) {
+              one[filter[filter_k]] = item.values[filter[filter_k]]
+              delete item.values[filter[filter_k]]
+            }
+            
+            for (var item_k in item.values) {
+              if(typeof item.values[item_k] !== 'number'){
+                  tds.push("<td class='txt'>" + item.values[item_k] + "</td>")
+                  gridColSortTypes.push('number')
+              }else{
+                tds.push("<td>" + item.values[item_k] + "</td>")
+                gridColSortTypes.push('string')
+              }
+            }
+            
+            var body_tr = "<tr><td>" + item.key + "</td>" + tds.join('') + "</tr>"
+            body_data.push(body_tr);
+          }
+          
+          
+          if(one){
+            console.log(one)
+            var head_meta = ""
+            for(var k in one){
+              head_meta += k + ': ' + one[k] + '    '
+            }
+            $('#hdr').html('Wrk Benchmark Table ')
+            $('#hdr_meta').html(head_meta)
+            
+          }
+          
+          
+          var tds_head = [];
+          for(var i in items){
+            console.log((parseInt(i)+1))
+            tds_head.push("<td><span id='demoHdr" + (parseInt(i) + 1) + "'>" + items[i] + "</span></td>")
+          }
+          
+          var head_tr = "<tr><td class='num'><span id='demoHdr0'>分类</span></td>" + tds_head.join('') + "</tr>"
+          
+          // head_data.push(head_tr);
+
+          $('#head').html(head_tr)
+          $('#body').html(body_data.join(''))
+          
+      		var gridColAlign = [];
+		
+      		var onColumnSort = function(newIndexOrder, columnIndex, lastColumnIndex) {
+      			var offset = (this.options.allowSelections && this.options.showSelectionColumn) ? 1 : 0, 
+      			    doc = document;
+			
+      			if (columnIndex !== lastColumnIndex) {
+      				if (lastColumnIndex > -1) {
+      					doc.getElementById("demoHdr" + (lastColumnIndex - offset)).parentNode.style.backgroundColor = "";
+      				}
+      				doc.getElementById("demoHdr" + (columnIndex - offset)).parentNode.style.backgroundColor = "#f7f7f7";
+      			}
+      		};
+		
+      		var onResizeGrid = function(newWidth, newHeight) {
+      			var demoDivStyle = document.getElementById("demoDiv").style;
+      			demoDivStyle.width = newWidth + "px";
+      			demoDivStyle.height = newHeight + "px";
+      		};
+		
+      		for (var i=0, col; col=gridColSortTypes[i]; i++) {
+      			gridColAlign[i] = (col === "number") ? "right" : "left";
+      		}
+		
+      		var myGrid = new Grid("demoGrid", {
+      		    	srcType : "dom", 
+      		    	srcData : "demoTable", 
+      		    	allowGridResize : true, 
+      		    	allowColumnResize : true, 
+      		    	allowClientSideSorting : true, 
+      		    	allowSelections : true, 
+      		    	allowMultipleSelections : true, 
+      		    	showSelectionColumn : true, 
+      		    	onColumnSort : onColumnSort, 
+      		    	onResizeGrid : onResizeGrid, 
+      		    	colAlign : gridColAlign, 
+      		    	colBGColors : ["#fafafa"], 
+      		    	colSortTypes : gridColSortTypes, 
+      		    	fixedCols : 1
+      		    });
+         
+            }); 
+        })
+        
+	
+		</script>
+	</body>
+</html>
