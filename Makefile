@@ -2,12 +2,18 @@ all: clean test
 
 test: prepare koa-1 koa-2 koa-2-async express
 
+report:
+	@cd logs
+	@wrk_scan
+	@echo	'merge logs complete'
+	
 prepare:
 	@cd koa2 && npm install
 	@cd ..
 	@cd other && npm install
 	@cd ..
 	@echo	'prepare complete'
+	
 	
 version:
 	@node -v

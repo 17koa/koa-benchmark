@@ -35,7 +35,7 @@
         var chart = nv.models.cumulativeLineChart()
             .useInteractiveGuideline(true)
             .x(function(d) { return d[0] })
-            .y(function(d) { return d[1]/100 })
+            .y(function(d) { return d[1] })
             .color(d3.scale.category10().range())
             .average(function(d) { return d.mean/100; })
             .duration(300)

@@ -6,10 +6,11 @@ pid=$!
 
 sleep 2
 
-wrk 'http://localhost:3333/?foo[bar]=baz' \
+wrk 'http://localhost:3333' \
   -d 3 \
   -c 50 \
   -t 8 \
+  > logs/${2##*/}.log \
   | grep 'Requests/sec' \
   | awk '{ print "  " $2 }'
 
