@@ -26,6 +26,12 @@ make all
 make test
 ```
 
+查看中间件请求测试
+
+```
+make test -f Makefile2
+```
+
 ## Results
 
 ```
