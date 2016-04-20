@@ -2,6 +2,8 @@
 
 比较koa和koa2和express性能
 
+![Preview](assets/preview.png)
+
 ## Prerequisites
 
 for OSX
