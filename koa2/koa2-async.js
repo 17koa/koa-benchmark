@@ -1,31 +1,28 @@
 
-'use strict';
+import http from 'http'
+import Koa from 'koa'
 
-var http = require('http');
-var koa = require('koa');
-var app = new koa();
-
+const app = new Koa()
 
 // number of middleware
-
-var n = parseInt(process.env.MW || '1', 10);
-console.log('  %s async middleware', n);
+let n = parseInt(process.env.MW || '1', 10)
+console.log('  %s async middleware', n)
 
 while (n--) {
   app.use(async (ctx, next) => {
-    await next();
-  });
+    await next()
+  })
 }
 
-var body = new Buffer('Hello World');
+const body = new Buffer('Hello World')
 
 app.use(async (ctx, next) => {
-  await next();
-  ctx.body = body;
-});
+  await next()
+  ctx.body = body
+})
 
 
 // var apprequire('./koa2-async.js')
-app.listen(3333);
+app.listen(3333)
 
-module.exports = app
+export default app
